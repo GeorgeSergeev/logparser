@@ -1,0 +1,88 @@
+Log parser project description
+1.	Log file is trace of CRM project execution
+2.	There are server and client log 
+3.	There is log record structure:
+	a.	Date/Time (not necessary)
+	b.	Level (not necessary)
+	c.	Method info
+	c.	Information part
+4.	Info part can consists command, SIP info, operation and other information. Only EXECUTEDCOMMAND and UNKNOWN (other) type of info part should be realized now.
+	Association info part and custom object (EXECUTEDCOMMAND or UNKNOWN) is required. 
+5.	Command can be described by id and name
+6.	Executed command is fact of client/server transaction
+7.	Executed command contains:
+	a.	Request id
+	b.	Command
+	c.	Timeout
+	d.	Request length
+	e.	Operation id
+	f.	Response Length
+	g.	Execution Time
+8.	Executed command can be associated with two log records (Request and response).
+9.	Method info contains:
+	a. 	Class name
+	b.	Method name
+	c. 	Source Path
+	d.	Line Number
+
+Log record example:
+
+2015-11-09 10:33:20.695 Debug: InitComponents and started 
+	- Date/Time: 2015-11-09 10:33:20.695 
+	- Level: Debug
+	- Method info: Null (not present)
+	- Info part: InitComponents and started 
+	It should be associated with UNKNOWN object type. Let it be String with info part
+
+2015-11-09 10:33:21.542 Debug: CommandRunner::runCommand start  RequestId  "19216805118520151109073321000004"  commandId  560  commandName  "OrgElementFlatGet"  timeout  -1  requestLength  332  operationId  "d65dfbc7de5444d2bfed7a6d6903508a|35339af3414a4e2cbc217d19a93d8bc4" 
+
+	- Date/Time: 2015-11-09 10:33:21.542 
+	- Level: Debug
+	- Method info: 
+		+ Class name: 	CommandRunner
+		+ Method name: 	runCommand
+	- Info part: start  RequestId  "19216805118520151109073321000004"  commandId  560  commandName  "OrgElementFlatGet"  timeout  -1  requestLength  332  operationId  "d65dfbc7de5444d2bfed7a6d6903508a|35339af3414a4e2cbc217d19a93d8bc4" 
+
+	It should be associated with EXECUTEDCOMMAND object type. Let it be String with info part
+		+ Request Id: "19216805118520151109073321000004"
+		+ COMMAND
+			+ commandId: 560
+			+ commandName: OrgElementFlatGet
+		+ Time out: -1
+		+ Request length:332
+		+ Response length: 0
+		+ Execution time:0
+		+ Operation Id: "d65dfbc7de5444d2bfed7a6d6903508a|35339af3414a4e2cbc217d19a93d8bc4" 
+
+
+			 
+2015-11-09 10:33:21.880 Debug: CommandRunner::runCommand end  RequestId  "19216805118520151109073321000004"  commandId  560  commandName  "OrgElementFlatGet"  responseLength  359184  execTime  337 
+	- Date/Time: 2015-11-09 10:33:21.880 
+	- Level: Debug
+	- Method info: 
+		+ Class name: 	CommandRunner
+		+ Method name: 	runCommand
+	- Info part: end  RequestId  "19216805118520151109073321000004"  commandId  560  commandName  "OrgElementFlatGet"  responseLength  359184  execTime  337  
+
+	This is same EXECUTEDCOMMAND object because RequestId equal to previouse. There are two fields should be updated:
+		+ Response length: 359184
+		+ Execution time: 337
+	
+
+2015-11-09 10:38:57.422 Debug: virtual void QMangoListForm::lockToolBar() ..\mango_crm\ui\core\qmangolistform.cpp 573 Lock list toolbar and control forms. LockCounter is   1 
+	- Date/Time: 2015-11-09 10:38:57.422 
+	- Level: Debug
+	- Method info: 
+		+ Class name: 	QMangoListForm
+		+ Method name: 	lockToolBar()
+		+ Source path:  "..\mango_crm\ui\core\qmangolistform.cpp"
+		+ Line number: 573
+	- Info part: Lock list toolbar and control forms. LockCounter is   1  
+
+
+
+
+
+
+
+
