@@ -1,7 +1,6 @@
 package alvioneurope.gsergeev.javagroup.clientlogimporter;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -27,11 +26,10 @@ public class CommandList {
 
     public Command findCommandById(int id) {
     	Command foundCommand = null;
-    	for(Iterator<Command> iterator = commandList.iterator(); iterator.hasNext();){
-    		if (iterator.next().getCommandId()==id) {
-    			foundCommand = iterator.next();
-    		}
+    	for (Command command : commandList){
+    		if (command.getCommandId()==id)
+    	        foundCommand = command;
     	}
-        return foundCommand;
+    	return foundCommand;
     }
 }

@@ -46,4 +46,8 @@ local.properties
 *.iml
 *.iws
 /target/
-/target/
+
+# Directories #
+/build/
+/bin/
+target/
