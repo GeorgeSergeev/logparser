@@ -2,7 +2,6 @@ package alvioneurope.gsergeev.javagroup.clientlogimporter;
 
 import java.util.Date;
 
-
 /**
  * Created by GSergeev on 11/16/2015.
  */
@@ -18,4 +17,27 @@ public class PrimaryLogRecord {
 
     }
 
+	public Date getRecordDateTime() {
+		return recordDateTime;
+	}
+
+	public LogLevel getLogLevel() {
+		return logLevel;
+	}
+
+	public MethodInfo getMethodInfo() {
+		return methodInfo;
+	}
+
+	public String getInformation() {
+		return information;
+	}
+
+	public AssociationType getAssociationType() {
+		return associationType;
+	}
+
+	public Object getAssociation() {
+		return association;
+	}	
 }

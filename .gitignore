@@ -45,3 +45,10 @@ local.properties
 .idea/
 *.iml
 *.iws
+/target/
+
+# Directories #
+/build/
+/bin/
+target/
+
