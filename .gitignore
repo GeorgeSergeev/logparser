@@ -32,6 +32,9 @@ local.properties
 # PDT-specific
 .buildpath
 
+# Maven
+target/
+
 # sbteclipse plugin
 .target
 
@@ -45,3 +48,4 @@ local.properties
 .idea/
 *.iml
 *.iws
+.target/
