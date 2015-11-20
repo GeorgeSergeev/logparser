@@ -1,5 +1,8 @@
 package alvioneurope.gsergeev.javagroup.clientlogimporter;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+
 /**
  * Created by GSergeev on 11/16/2015.
  */
@@ -12,12 +15,27 @@ public class ExecutedCommand {
     private String operationId;
     private int responseLength;
     private int execTime;
-    private boolean isExecutedCommand;
+    private boolean executedCommand;
 
     public ExecutedCommand(String executedCommand){
-        if (splitString(executedCommand))
-            isExecutedCommand = true;
-        else isExecutedCommand = false;
+        this.executedCommand = splitString(executedCommand);
+    }
+
+    public boolean checkString(String string) {
+        if (string == null || string.length() == 0) return false;
+        int i = 1;
+        if (string.charAt(0) == '-') {
+            if (string.length() == 1)
+                return false;
+        }
+        char c;
+        for (; i < string.length(); i++) {
+            c = string.charAt(i);
+            if (!(c >= '0' && c <= '9')) {
+                return false;
+            }
+        }
+        return true;
     }
 
     public boolean splitString(String str){
@@ -27,14 +45,14 @@ public class ExecutedCommand {
             String commandName = null;
             String splitStr[] = str.split("  ");
             for (int i=0; i<splitStr.length; i++){
-                if (splitStr[i].compareTo("RequestId")== 0) requestId = splitStr[i+1].replaceAll("\"", "");
-                if (splitStr[i].compareTo("commandId")== 0) commandId = (Integer.parseInt(splitStr[i+1]));
-                if (splitStr[i].compareTo("commandName")== 0) commandName = (splitStr[i+1].replaceAll("\"", ""));
-                if (splitStr[i].compareTo("timeout")== 0) timeout = Integer.parseInt(splitStr[i+1]);
-                if (splitStr[i].compareTo("requestLength")== 0) requestLength = Integer.parseInt(splitStr[i+1]);
-                if (splitStr[i].compareTo("operationId")== 0) operationId = splitStr[i+1].replaceAll("\"", "");
-                if (splitStr[i].compareTo("responseLength")== 0) responseLength = Integer.parseInt(splitStr[i+1]);
-                if (splitStr[i].compareTo("execTime")== 0) execTime = Integer.parseInt(splitStr[i+1].replaceAll(" ", ""));
+                if (splitStr.length > (i+1) && splitStr[i].compareTo("RequestId")== 0 && splitStr.length > i+1) requestId = splitStr[i+1].replaceAll("\"", "");
+                if (splitStr.length > (i+1) && splitStr[i].compareTo("commandId")== 0 && checkString(splitStr[i+1])) commandId = (Integer.parseInt(splitStr[i+1]));
+                if (splitStr.length > (i+1) && splitStr[i].compareTo("commandName")== 0) commandName = (splitStr[i+1].replaceAll("\"", ""));
+                if (splitStr.length > (i+1) && splitStr[i].compareTo("timeout")== 0 && checkString(splitStr[i+1])) timeout = Integer.parseInt(splitStr[i+1]);
+                if (splitStr.length > (i+1) && splitStr[i].compareTo("requestLength")== 0 && checkString(splitStr[i+1])) requestLength = Integer.parseInt(splitStr[i+1]);
+                if (splitStr.length > (i+1) && splitStr[i].compareTo("operationId")== 0) operationId = splitStr[i+1].replaceAll("\"", "");
+                if (splitStr.length > (i+1) && splitStr[i].compareTo("responseLength")== 0 && checkString(splitStr[i+1])) responseLength = Integer.parseInt(splitStr[i+1]);
+                if (splitStr.length > (i+1) && splitStr[i].compareTo("execTime")== 0 && checkString(splitStr[i+1])) execTime = Integer.parseInt(splitStr[i+1].replaceAll(" ", ""));
             }
             if (commandId != 0 && commandName!= null)
                 command = new Command(commandId,commandName);
@@ -70,7 +88,7 @@ public class ExecutedCommand {
         return execTime;
     }
 
-    public boolean getIsExecutedCommand() {
-        return isExecutedCommand;
+    public boolean isExecutedCommand() {
+        return executedCommand;
     }
 }
