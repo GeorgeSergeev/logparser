@@ -12,4 +12,12 @@ public class ExecutedCommand {
     private int responseLength;
     private int execTime;
 
+    public String getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(String requestId) {
+        this.requestId = requestId;
+    }
+
 }
