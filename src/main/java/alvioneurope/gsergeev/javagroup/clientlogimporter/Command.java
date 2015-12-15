@@ -12,6 +12,10 @@ public class Command {
         this.commandName = commandName;
     }
 
+    public boolean equals(Object obj){
+        return obj instanceof Command && ((Command) obj).getCommandId() == this.getCommandId();
+    }
+
     public int getCommandId() {
         return commandId;
     }

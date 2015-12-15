@@ -24,7 +24,7 @@ public class CommandListTest {
 
     @Test
     public void testAddCommand() throws Exception {
-        assertEquals(0,testCommandList.getCommandList().size());
+        assertEquals(0, testCommandList.getCommandList().size());
         testCommandList.addCommand(testCommand1);
         assertEquals(1, testCommandList.getCommandList().size());
         testCommandList.addCommand(testCommand2);
