@@ -23,8 +23,7 @@ public class ExecutedCommand {
     }
 
     public boolean splitString(String str){
-        if (!str.contains("runCommand")) return false;
-        else{
+        if (str.contains("runCommand")){
             int commandId = 0;
             String commandName = null;
             String splitStr[] = str.split("  ");
@@ -41,6 +40,9 @@ public class ExecutedCommand {
             if (commandId != 0 && commandName!= null)
                 command = new Command(commandId,commandName);
             return true;
+        }
+        else {
+            return false;
         }
     }
 
